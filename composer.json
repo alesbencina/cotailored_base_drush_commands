@@ -1,11 +1,11 @@
 {
-    "name": "org/cotailored_base_drush_commands",
+    "name": "alesbencina/cotailored_base_drush_commands",
     "description": "This extension provides new commands for Drush.",
-    "type": "drupal-drush",
+    "type": "drupal-module",
     "authors": [
         {
-            "name": "Author name",
-            "email": "author@example.com"
+            "name": "Ales Bencina",
+            "email": "ales.bencina@agiledrop.com"
         }
     ],
     "require": {
