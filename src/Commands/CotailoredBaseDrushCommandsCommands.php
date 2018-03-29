@@ -66,18 +66,18 @@ class CotailoredBaseDrushCommandsCommands extends DrushCommands implements Custo
 
     // TODO: read kits from filesystem or db.
     $kits = [
-      'cotailored_kickstart' => 'cotailored_kickstart',
+      'tdx_kickstart' => 'tdx_kickstart',
     ];
 
     $kit = $io->choice('Choose your kit', $kits);
-    $kit_path = drupal_get_path('theme', 'cotailored_base') . '/kits/' . $kit;
+    $kit_path = drupal_get_path('theme', 'tdx_base') . '/kits/' . $kit;
 
     if (UrlHelper::isValid($kit, TRUE)) {
       $kit_url = $kit;
       $kit_name = 'kit';
 
       // Get kit name from kit url.
-      if (preg_match("/\/cotailored_base\-kit\-([a-z0-9\_]*)\//", $kit_url, $matches)) {
+      if (preg_match("/\/tdx_base\-kit\-([a-z0-9\_]*)\//", $kit_url, $matches)) {
         $kit_name = $kit = $matches[1];
       }
 
@@ -101,15 +101,15 @@ class CotailoredBaseDrushCommandsCommands extends DrushCommands implements Custo
 
     // Alter the contents of the .info file based on the command options.
     $alterations = [
-      'COTAILORED_BASE_SUBTHEME_NAME' => $name,
-      'COTAILORED_BASE_SUBTHEME_DESCRIPTION' => $description,
-      'COTAILORED_BASE_SUBTHEME_MACHINE_NAME' => $machine_name,
+      'TDX_BASE_SUBTHEME_NAME' => $name,
+      'TDX_BASE_SUBTHEME_DESCRIPTION' => $description,
+      'TDX_BASE_SUBTHEME_MACHINE_NAME' => $machine_name,
       'hidden: true' => '',
     ];
 
-    $files_to_replace = $this->cotailored_base_get_files_to_make_replacements($kit);
+    $files_to_replace = $this->tdx_base_get_files_to_make_replacements($kit);
     foreach ($files_to_replace as $file_to_replace) {
-      $this->cotailored_base_file_str_replace($subtheme_path . '/' . $file_to_replace, array_keys($alterations), $alterations);
+      $this->tdx_base_file_str_replace($subtheme_path . '/' . $file_to_replace, array_keys($alterations), $alterations);
     }
 
     // Rename files.
@@ -133,7 +133,7 @@ class CotailoredBaseDrushCommandsCommands extends DrushCommands implements Custo
       drush_op('rename', $file_original_path, $file_new_path);
     }
 
-    $io->success('Successfully created the Cotailored base subtheme "' . $name . '"created in: path ' . $file_new_path . ' using the kit ' . $kit . '');
+    $io->success('Successfully created the Tdx base subtheme "' . $name . '"created in: path ' . $file_new_path . ' using the kit ' . $kit . '');
   }
 
   /**
@@ -145,7 +145,7 @@ class CotailoredBaseDrushCommandsCommands extends DrushCommands implements Custo
    * @return array
    *   Return array.
    */
-  function cotailored_base_get_files_to_make_replacements($kit = 'cotailored_kickstart') {
+  function tdx_base_get_files_to_make_replacements($kit = 'tdx_kickstart') {
     return [
       $kit . '.info.yml',
       $kit . '.libraries.yml',
@@ -168,7 +168,7 @@ class CotailoredBaseDrushCommandsCommands extends DrushCommands implements Custo
    * @param $find
    * @param $replace
    */
-  function cotailored_base_file_str_replace($file_path, $find, $replace) {
+  function tdx_base_file_str_replace($file_path, $find, $replace) {
     $file_contents = file_get_contents($file_path);
     $file_contents = str_replace($find, $replace, $file_contents);
     file_put_contents($file_path, $file_contents);
